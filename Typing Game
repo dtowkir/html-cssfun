@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Typing Game</h1>
+        <p>Type the word below:</p>
+        <div id="word-display">start</div>
+        <input type="text" id="input-box" placeholder="Start typing..." autofocus>
+        <p>Score: <span id="score">0</span></p>
+    </div>
+
+    <script>
+        const words = ["apple", "banana", "grape", "orange", "strawberry", "watermelon", "cherry", "peach", "lemon", "mango"];
+        let score = 0;
+
+        function getRandomWord() {
+            return words[Math.floor(Math.random() * words.length)];
+        }
+
+        function updateWord() {
+            const wordDisplay = document.getElementById("word-display");
+            wordDisplay.innerText = getRandomWord();
+        }
+
+        document.getElementById("input-box").addEventListener("input", (event) => {
+            const inputBox = event.target;
+            const currentWord = document.getElementById("word-display").innerText;
+
+            if (inputBox.value === currentWord) {
+                score++;
+                document.getElementById("score").innerText = score;
+                inputBox.value = "";
+                updateWord();
+            }
+        });
+
+        // Initialize the first word
+        updateWord();
+    </script>
+</body>
+</html>
+
+
+css
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: pink;
+}
+
+.container {
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+#word-display {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#input-box {
+    padding: 10px;
+    font-size: 18px;
+    width: 200px;
+    border: 2px solid #333;
+    border-radius: 5px;
+}
+
+#score {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+}
